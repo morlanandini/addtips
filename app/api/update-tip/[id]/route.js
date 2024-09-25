@@ -1,6 +1,6 @@
 import { connectToDB } from '@/utils/database';
 import Prompt from '@/models/prompt';
-import { useRouter } from 'next/router'; // Added this import
+import { useRouter } from 'next/navigation'; // Added this import
 
 
 export const GET = async (request, { params }) => {
