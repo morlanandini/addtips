@@ -49,6 +49,7 @@ const Profilepage = () => {
   }, [session?.user.id]);
 
   return (
+
     <Profile
     name = "My"
     desc= "Welcome to your personalized profile"
@@ -56,6 +57,8 @@ const Profilepage = () => {
     handleEdit = {handleEdit}
     handleDelete = {handleDelete}
     />
+
+
   )
 }
 
