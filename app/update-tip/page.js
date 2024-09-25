@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-
+import { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Form from "@/components/Form";
 
 const UpdatePrompt = () => {
@@ -15,6 +14,8 @@ const UpdatePrompt = () => {
 
   useEffect(() => {
     const getPromptDetails = async () => {
+      if (!promptId) return;
+
       const response = await fetch(`/api/create/${promptId}`);
       const data = await response.json();
 
@@ -24,18 +25,25 @@ const UpdatePrompt = () => {
       });
     };
 
-    if (promptId) getPromptDetails();
+    getPromptDetails();
   }, [promptId]);
 
   const updatePrompt = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!promptId) return alert("Missing PromptId!");
+    if (!promptId) {
+      alert("Missing PromptId!");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch(`/api/create/${promptId}`, {
         method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
@@ -44,22 +52,27 @@ const UpdatePrompt = () => {
 
       if (response.ok) {
         router.push("/");
+      } else {
+        const errorData = await response.json();
+        console.error("Error updating prompt:", errorData);
       }
     } catch (error) {
-      console.log(error);
+      console.error("An error occurred:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <Form
-      type='Edit'
-      post={post}
-      setPost={setPost}
-      submitting={submitting}
-      handleSubmit={updatePrompt}
-    />
+    <Suspense fallback={<div>Loading...</div>}>
+      <Form
+        type='Edit'
+        post={post}
+        setPost={setPost}
+        submitting={submitting}
+        handleSubmit={updatePrompt}
+      />
+    </Suspense>
   );
 };
 
