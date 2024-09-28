@@ -7,10 +7,10 @@ const Home = () => {
           <h1 className='head_text text-center'>
               Discover & Share
               <br />
-              <span className="orange_gradient text-center">Help you to cross the barriers</span>
+              <span className="green_gradient text-center">Help you to cross the barriers</span>
           </h1>
 
-          <p className='desc text-center'> Tipnosys is a website where you can discover, create and share your stories</p>
+          <p className='desc text-center'> This is a website where you can discover, create and share your Taughts & tips for Others</p>
       </section>
       <Feed></Feed></>
   )

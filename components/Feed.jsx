@@ -43,7 +43,7 @@ const Feed = () => {
       <form className="relative w-full flex-center">
         <input
           type="text"
-          placeholder="Search for tags"
+          placeholder="Search for tags, under implementation"
           value={searchText}
           onChange={handleChange}
           className="search_input peer"

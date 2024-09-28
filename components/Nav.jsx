@@ -28,21 +28,22 @@ const Nav = () => {
       <nav className='flex-between w-full mb-16 pt-3'>
         <Link href='/' className="flex gap-2 flex-center">
           <Image
-          src="/assets/images/logo.svg"
+          src="/assets/images/test.webp"
           alt="logo"
-          width={30}
-          height={30}
+          width={34}
+          height={34}
           className="object-contain"
          />
-         <p className='logo_text'>Tipnosys</p>
+         <p className='logo_text'>Tipomania</p>
          </Link>
 
          <div className='sm:flex hidden'>
               {session?.user ? 
               (<div className='flex gap-3 md:gap-5'>
                 <Link href="/create-post" className='black_btn'> Create Post</Link>
-                <button type="button" onClick={() => signOut({ callbackUrl: '/' })} className='outline_btn'> Sign Out</button>
                 <Link href="/profile" className='black_btn'> Profile</Link>
+                <button type="button" onClick={() => signOut({ callbackUrl: '/' })} className='outline_btn'> Sign Out</button>
+
                 <Image
                 src={session?.user.image}
                 alt = "profile"
